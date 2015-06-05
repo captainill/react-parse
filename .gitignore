@@ -1,4 +1,3 @@
 node_modules
-public
-src/server/webpack-stats.json
+js/bundle.js
 .DS_store

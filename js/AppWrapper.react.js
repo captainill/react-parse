@@ -20,25 +20,27 @@
  *
  */
 
-var React = require('react');
+import React from 'react';
 
-var Overview = require('./Overview.react.js');
-var Expenses = require('./Expenses.react.js');
-var Sidebar = require('./Sidebar.react.js');
+import Overview from './Overview.react.js';
+import Expenses from './Expenses.react.js';
+import Sidebar from './Sidebar.react.js';
 
-var contents = [
+const contents = [
   <Overview />,
   <Expenses />
 ];
 
-var AppWrapper = React.createClass({
-  getInitialState: function() {
-    return {
-      currentTab: 0
-    };
-  },
+export default class AppWrapper extends React.Component {
 
-  render: function() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentTab: 0
+    };  
+  }
+
+  render() {
     return (
       <div>
         <div className='menu'>
@@ -59,11 +61,9 @@ var AppWrapper = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  selectTab: function(tab) {
+  selectTab(tab) {
     this.setState({ currentTab: tab });
   }
-});
-
-module.exports = AppWrapper;
+};

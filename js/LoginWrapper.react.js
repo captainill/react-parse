@@ -20,12 +20,12 @@
  *
  */
 
-var React = require('react');
-var Parse = require('parse').Parse;
-var ParseReact = require('parse-react');
-var ParseComponent = require('parse-react/class')
+import React from 'react';
+import { Parse } from 'parse';
+import ParseReact from 'parse-react';
+import ParseComponent from 'parse-react/class';
 
-var AppWrapper = require('./AppWrapper.react.js');
+const AppWrapper = require('./AppWrapper.react.js');
 
 export default class LoginWrapper extends ParseComponent{
 
@@ -89,9 +89,9 @@ export default class LoginWrapper extends ParseComponent{
   }
 
   submit() {
-    var self = this;
-    var username = React.findDOMNode(this.refs.username).value;
-    var password = React.findDOMNode(this.refs.password).value;
+    const self = this;
+    const username = React.findDOMNode(this.refs.username).value;
+    const password = React.findDOMNode(this.refs.password).value;
     if (username.length && password.length) {
       Parse.User.logIn(username, password).then(function() {
         self.setState({
