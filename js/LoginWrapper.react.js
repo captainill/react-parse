@@ -23,26 +23,30 @@
 var React = require('react');
 var Parse = require('parse').Parse;
 var ParseReact = require('parse-react');
+var ParseComponent = require('parse-react/class')
 
 var AppWrapper = require('./AppWrapper.react.js');
 
-var LoginWrapper = React.createClass({
-  mixins: [ParseReact.Mixin],
+export default class LoginWrapper extends ParseComponent{
 
-  getInitialState: function() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       error: null,
       signup: false
     };
-  },
 
-  observe: function() {
+    this.submit = this.submit.bind(this);
+    this.keyDown = this.keyDown.bind(this);
+  }  
+
+  observe() {
     return {
       user: ParseReact.currentUser
     };
-  },
+  }
 
-  render: function() {
+  render() {
     if (this.data.user) {
       return (
         <div>
@@ -88,9 +92,9 @@ var LoginWrapper = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  submit: function() {
+  submit() {
     var self = this;
     var username = React.findDOMNode(this.refs.username).value;
     var password = React.findDOMNode(this.refs.password).value;
@@ -126,24 +130,22 @@ var LoginWrapper = React.createClass({
         error: 'Please enter all fields'
       });
     }
-  },
+  }
 
-  logOut: function() {
+  logOut() {
     Parse.User.logOut();
-  },
+  }
 
-  keyDown: function(e) {
+  keyDown(e) {
     if (e.keyCode === 13) {
       this.submit();
     }
-  },
+  }
 
-  toggleSignup: function() {
+  toggleSignup() {
     this.setState({
       signup: !this.state.signup
     });
   }
 
-});
-
-module.exports = LoginWrapper;
+};

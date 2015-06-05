@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "browserify": "^6.2.0",
-    "reactify": "^0.15.2",
+    "babelify": "^6.1.2",
     "watchify": "^2.1.1"
   },
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "browserify": {
     "transform": [
-      "reactify"
+      "babelify"
     ]
   }
 }

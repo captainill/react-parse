@@ -24,7 +24,7 @@ var React = require('react');
 var Parse = require('parse').Parse;
 
 // Insert your app's keys here:
-Parse.initialize('APPLICATION_ID', 'JAVASCRIPT_KEY');
+Parse.initialize('A6buzy51zTb8zNLfAWebisg4OzgaZws6Nh7FOBxt', 'brLOml1pm3z4LBKhFpp6Eq13BVhLMDsvfHklNeq8');
 
 var LoginWrapper = require('./LoginWrapper.react.js');
 
