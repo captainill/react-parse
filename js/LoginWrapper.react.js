@@ -83,12 +83,6 @@ export default class LoginWrapper extends ParseComponent{
               {this.state.signup ? 'Sign up' : 'Log in'}
             </a>
           </div>
-          <div className='row centered'>
-            or&nbsp;
-            <a onClick={this.toggleSignup}>
-              {this.state.signup ? 'log in' : 'sign up'}
-            </a>
-          </div>
         </div>
       </div>
     );
@@ -99,32 +93,15 @@ export default class LoginWrapper extends ParseComponent{
     var username = React.findDOMNode(this.refs.username).value;
     var password = React.findDOMNode(this.refs.password).value;
     if (username.length && password.length) {
-      if (this.state.signup) {
-        console.log('signup');
-        var u = new Parse.User({
-          username: username,
-          password: password
+      Parse.User.logIn(username, password).then(function() {
+        self.setState({
+          error: null
         });
-        u.signUp().then(function() {
-          self.setState({
-            error: null
-          });
-        }, function() {
-          self.setState({
-            error: 'Invalid account information'
-          });
+      }, function() {
+        self.setState({
+          error: 'Incorrect username or password'
         });
-      } else {
-        Parse.User.logIn(username, password).then(function() {
-          self.setState({
-            error: null
-          });
-        }, function() {
-          self.setState({
-            error: 'Incorrect username or password'
-          });
-        });
-      }
+      });
     } else {
       this.setState({
         error: 'Please enter all fields'
@@ -140,12 +117,6 @@ export default class LoginWrapper extends ParseComponent{
     if (e.keyCode === 13) {
       this.submit();
     }
-  }
-
-  toggleSignup() {
-    this.setState({
-      signup: !this.state.signup
-    });
   }
 
 };
